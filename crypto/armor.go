@@ -10,7 +10,7 @@ import (
 	"github.com/cometbft/cometbft/crypto"
 	"golang.org/x/crypto/argon2"
 	"golang.org/x/crypto/chacha20poly1305"
-	"golang.org/x/crypto/openpgp/armor" //nolint:staticcheck //TODO: remove this dependency
+	"github.com/ProtonMail/go-crypto/openpgp/armor"
 
 	errorsmod "cosmossdk.io/errors"
 
