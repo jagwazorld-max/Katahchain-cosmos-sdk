@@ -13,6 +13,7 @@ require (
 	cosmossdk.io/store v1.1.2
 	cosmossdk.io/x/tx v0.14.0
 	github.com/99designs/keyring v1.2.1
+	github.com/ProtonMail/go-crypto v1.5.2
 	github.com/bgentry/speakeasy v0.2.0
 	github.com/bits-and-blooms/bitset v1.24.3
 	github.com/chzyer/readline v1.5.1
@@ -54,7 +55,6 @@ require (
 	github.com/stretchr/testify v1.11.1
 	github.com/tendermint/go-amino v0.16.0
 	go.uber.org/mock v0.6.0
-	github.com/ProtonMail/go-crypto v1.5.2
 	golang.org/x/crypto v0.41.0
 	golang.org/x/sync v0.16.0
 	google.golang.org/genproto/googleapis/api v0.0.0-20250707201910-8d1bb00bc6a7
