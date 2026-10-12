@@ -1,0 +1,28 @@
+name: Armor Compatibility
+
+on:
+  push:
+    branches:
+      - katahchain-v0.53.6-openpgp-fix
+  pull_request:
+    branches:
+      - katahchain-v0.53.6-openpgp-fix
+
+permissions:
+  contents: read
+
+jobs:
+  armor-compatibility:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout SDK fork
+        uses: actions/checkout@v4
+      - name: Set up Go
+        uses: actions/setup-go@v5
+        with:
+          go-version-file: go.mod
+          cache: true
+      - name: Verify module checksums
+        run: go mod verify
+      - name: Run armor and legacy key compatibility tests
+        run: go test ./crypto -run '^(TestArmorUnarmorPrivKey|TestArmorUnarmorPubKey|TestArmorInfoBytes|TestUnarmorInfoBytesErrors|TestArmor|TestBcryptLegacyEncryption)$' -count=1
