@@ -9,7 +9,7 @@ on:
       - katahchain-v0.53.6-openpgp-fix
 
 permissions:
-  contents: read
+  contents: write
 
 jobs:
   armor-compatibility:
@@ -17,11 +17,23 @@ jobs:
     steps:
       - name: Checkout SDK fork
         uses: actions/checkout@v4
+        with:
+          ref: katahchain-v0.53.6-openpgp-fix
       - name: Set up Go
         uses: actions/setup-go@v5
         with:
           go-version-file: go.mod
           cache: true
+      - name: Resolve and record dependency checksums
+        run: |
+          go mod tidy
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add go.mod go.sum
+          if ! git diff --cached --quiet; then
+            git commit -m "chore: record ProtonMail crypto checksums"
+            git push origin HEAD:katahchain-v0.53.6-openpgp-fix
+          fi
       - name: Verify module checksums
         run: go mod verify
       - name: Run armor and legacy key compatibility tests
